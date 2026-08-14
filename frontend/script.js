@@ -2,10 +2,7 @@ console.log("SCRIPT LOADED");
 
 const message = document.getElementById("message");
 
-
-
 document.getElementById("signupBtn").addEventListener("click", async () => {
-
     console.log("SIGNUP BUTTON CLICKED");
 
     const email = document.getElementById("signupEmail").value.trim();
@@ -28,16 +25,10 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
     }
 
     console.log("SIGNUP RESPONSE:", data);
-
-    message.textContent =
-        "Account created! You can now log in.";
+    message.textContent = "Account created! You can now log in.";
 });
 
-
-
-
 document.getElementById("loginBtn").addEventListener("click", async () => {
-
     console.log("LOGIN BUTTON CLICKED");
 
     const email = document.getElementById("loginEmail").value.trim();
@@ -48,11 +39,10 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         return;
     }
 
-    const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
 
     if (error) {
         console.error("LOGIN ERROR:", error);
@@ -61,17 +51,13 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     }
 
     console.log("LOGGED IN USER:", data.user);
-
     message.textContent = "Login successful!";
 
     await loadProfile();
+    await loadCapsules();
 });
 
-
-
-
 async function loadProfile() {
-
     console.log("Checking for logged-in user...");
 
     const {
@@ -107,10 +93,8 @@ async function loadProfile() {
 
     console.log("PROFILE:", profile);
 
-    message.textContent =
-        `Welcome, ${profile.username}!`;
+    message.textContent = `Welcome, ${profile.username}!`;
 
-    // Fill profile inputs
     document.getElementById("usernameInput").value =
         profile.username || "";
 
@@ -118,9 +102,7 @@ async function loadProfile() {
         profile.full_name || "";
 }
 
-
 document.getElementById("saveProfileBtn").addEventListener("click", async () => {
-
     console.log("SAVING PROFILE...");
 
     const username =
@@ -153,22 +135,12 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
     }
 
     console.log("PROFILE UPDATED!");
+    message.textContent = "Profile saved successfully!";
 
-    message.textContent =
-        "Profile saved successfully!";
-
-    // Reload profile so the welcome message updates too
     await loadProfile();
 });
 
-
-
-
-loadProfile();
-loadCapsules();
-
 document.getElementById("createCapsuleBtn").addEventListener("click", async () => {
-
     console.log("CREATING CAPSULE...");
 
     const title =
@@ -181,8 +153,7 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
         document.getElementById("unlockDate").value;
 
     const capsuleStatus =
-    document.getElementById("capsuleStatus");
-
+        document.getElementById("capsuleStatus");
 
     if (!title || !capsuleText || !unlockAt) {
         capsuleStatus.textContent =
@@ -191,26 +162,17 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
         return;
     }
 
-
-    
     const {
         data: { user },
         error: userError
     } = await supabaseClient.auth.getUser();
 
-
     if (userError || !user) {
-
         console.error("USER ERROR:", userError);
-
-        capsuleStatus.textContent =
-            "Please log in first.";
-
+        capsuleStatus.textContent = "Please log in first.";
         return;
     }
 
-
-    // Insert capsule
     const { data, error } =
         await supabaseClient
             .from("capsules")
@@ -223,59 +185,41 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
             .select()
             .single();
 
-
     if (error) {
-
         console.error("CAPSULE ERROR:", error);
-
-        capsuleStatus.textContent =
-            error.message;
-
+        capsuleStatus.textContent = error.message;
         return;
     }
-
 
     console.log("CAPSULE CREATED:", data);
 
     capsuleStatus.textContent =
         "🔒 Capsule locked successfully!";
 
-
-    // Clear form
     document.getElementById("capsuleTitle").value = "";
     document.getElementById("capsuleMessage").value = "";
     document.getElementById("unlockDate").value = "";
 
+    await loadCapsules();
 });
 
-
 async function loadCapsules() {
-
     console.log("Loading capsules...");
 
     const capsulesList =
         document.getElementById("capsulesList");
 
-
-    
     const {
         data: { user },
         error: userError
     } = await supabaseClient.auth.getUser();
 
-
     if (userError || !user) {
-
-        console.log("No logged-in user.");
-
         capsulesList.innerHTML =
             "<p>Please log in to see your capsules.</p>";
-
         return;
     }
 
-
-    
     const { data: capsules, error } =
         await supabaseClient
             .from("capsules")
@@ -283,101 +227,100 @@ async function loadCapsules() {
             .eq("user_id", user.id)
             .order("unlock_at", { ascending: true });
 
-
     if (error) {
-
         console.error("CAPSULE LOAD ERROR:", error);
-
         capsulesList.innerHTML =
             `<p>${error.message}</p>`;
-
         return;
     }
-
 
     console.log("CAPSULES:", capsules);
 
-
-    
     if (!capsules || capsules.length === 0) {
-
         capsulesList.innerHTML =
             "<p>You haven't created any capsules yet.</p>";
-
         return;
     }
 
-
-    
     capsulesList.innerHTML = "";
 
-
-
-    const now = new Date();
-
-
-    
     capsules.forEach(capsule => {
-
-        const unlockTime =
-            new Date(capsule.unlock_at);
-
-        const card =
-            document.createElement("div");
-
+        const card = document.createElement("div");
         card.className = "capsule-card";
 
+        const unlockTime = new Date(capsule.unlock_at);
+        const now = new Date();
 
-    
         if (unlockTime <= now) {
-
             card.innerHTML = `
                 <h3>🔓 ${escapeHTML(capsule.title)}</h3>
-
-                <p>
-                    <strong>Unlocked</strong>
-                </p>
-
-                <p>
-                    ${escapeHTML(capsule.message)}
-                </p>
-
-                <small>
-                    Unlocked on:
-                    ${unlockTime.toLocaleString()}
-                </small>
+                <p><strong>Unlocked!</strong></p>
+                <p>${escapeHTML(capsule.message)}</p>
+                <small>Unlocked on: ${unlockTime.toLocaleString()}</small>
             `;
 
+            capsulesList.appendChild(card);
         } else {
-
             card.innerHTML = `
                 <h3>🔒 ${escapeHTML(capsule.title)}</h3>
-
-                <p>
-                    <strong>Locked</strong>
-                </p>
-
-                <p>
-                    Opens on:
-                    ${unlockTime.toLocaleString()}
-                </p>
+                <p><strong>Time remaining:</strong></p>
+                <p id="countdown-${capsule.id}">Calculating...</p>
+                <small>Opens on: ${unlockTime.toLocaleString()}</small>
             `;
+
+            capsulesList.appendChild(card);
+
+            startCountdown(capsule, card, unlockTime);
         }
-
-
-        capsulesList.appendChild(card);
-
     });
 }
 
+function startCountdown(capsule, card, unlockTime) {
+    const countdown =
+        document.getElementById(`countdown-${capsule.id}`);
 
+    const timer = setInterval(() => {
+        const now = new Date();
+        const difference = unlockTime - now;
 
+        if (difference <= 0) {
+            clearInterval(timer);
+
+            card.innerHTML = `
+                <h3>🔓 ${escapeHTML(capsule.title)}</h3>
+                <p><strong>Unlocked!</strong></p>
+                <p>${escapeHTML(capsule.message)}</p>
+                <small>Unlocked just now.</small>
+            `;
+
+            return;
+        }
+
+        const totalSeconds =
+            Math.floor(difference / 1000);
+
+        const days =
+            Math.floor(totalSeconds / 86400);
+
+        const hours =
+            Math.floor((totalSeconds % 86400) / 3600);
+
+        const minutes =
+            Math.floor((totalSeconds % 3600) / 60);
+
+        const seconds =
+            totalSeconds % 60;
+
+        countdown.textContent =
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+}
 
 function escapeHTML(text) {
-
     const div = document.createElement("div");
-
     div.textContent = text;
-
     return div.innerHTML;
 }
+
+loadProfile();
+loadCapsules();
