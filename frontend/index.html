@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>FutureSelf</title>
 
     <link rel="stylesheet" href="style.css">
@@ -12,6 +13,50 @@
 
     <h1>FutureSelf</h1>
 
+    <div>
+        <h2>Create Account</h2>
+
+        <input
+            type="email"
+            id="signupEmail"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Password"
+        >
+
+        <button id="signupBtn">Sign Up</button>
+    </div>
+
+
+    <div>
+        <h2>Login</h2>
+
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+        >
+
+        <button id="loginBtn">Login</button>
+    </div>
+
+
+    <p id="message"></p>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
