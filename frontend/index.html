@@ -68,6 +68,38 @@
     <button id="saveProfileBtn">Save Profile</button>
 
 </div>
+<div id="capsuleSelection">
+
+    <h2>Create a Time Capsule</h2>
+
+    <input
+        type="text"
+        id="capsuleTitle"
+        placeholder="Capsule title"
+    >
+
+    <textarea
+        id="capsuleMessage"
+        placeholder="Write something for your future self..."
+        rows="6"
+    ></textarea>
+
+    <label for="unlockDate">
+        When should this capsule unlock?
+    </label>
+
+    <input
+        type="datetime-local"
+        id="unlockDate"
+    >
+
+    <button id="createCapsuleBtn">
+        Lock Capsule 🔒
+    </button>
+
+</div>
+
+<div id="capsuleStatus"></div>
 
 
     <p id="message"></p>

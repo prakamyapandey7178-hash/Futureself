@@ -178,3 +178,87 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
 // =====================================
 
 loadProfile();
+// =====================================
+// CREATE CAPSULE
+// =====================================
+
+document.getElementById("createCapsuleBtn").addEventListener("click", async () => {
+
+    console.log("CREATING CAPSULE...");
+
+    const title =
+        document.getElementById("capsuleTitle").value.trim();
+
+    const capsuleText =
+        document.getElementById("capsuleMessage").value.trim();
+
+    const unlockAt =
+        document.getElementById("unlockDate").value;
+
+    const capsuleStatus =
+    document.getElementById("capsuleStatus");
+
+
+    if (!title || !capsuleText || !unlockAt) {
+        capsuleStatus.textContent =
+            "Please fill in all the fields.";
+
+        return;
+    }
+
+
+    // Get logged-in user
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        console.error("USER ERROR:", userError);
+
+        capsuleStatus.textContent =
+            "Please log in first.";
+
+        return;
+    }
+
+
+    // Insert capsule
+    const { data, error } =
+        await supabaseClient
+            .from("capsules")
+            .insert({
+                user_id: user.id,
+                title: title,
+                message: capsuleText,
+                unlock_at: unlockAt
+            })
+            .select()
+            .single();
+
+
+    if (error) {
+
+        console.error("CAPSULE ERROR:", error);
+
+        capsuleStatus.textContent =
+            error.message;
+
+        return;
+    }
+
+
+    console.log("CAPSULE CREATED:", data);
+
+    capsuleStatus.textContent =
+        "🔒 Capsule locked successfully!";
+
+
+    // Clear form
+    document.getElementById("capsuleTitle").value = "";
+    document.getElementById("capsuleMessage").value = "";
+    document.getElementById("unlockDate").value = "";
+
+});
