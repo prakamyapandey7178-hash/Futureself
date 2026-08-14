@@ -3,9 +3,6 @@ console.log("SCRIPT LOADED");
 const message = document.getElementById("message");
 
 
-// =====================================
-// SIGN UP
-// =====================================
 
 document.getElementById("signupBtn").addEventListener("click", async () => {
 
@@ -37,9 +34,7 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
 });
 
 
-// =====================================
-// LOGIN
-// =====================================
+
 
 document.getElementById("loginBtn").addEventListener("click", async () => {
 
@@ -73,9 +68,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 });
 
 
-// =====================================
-// LOAD PROFILE
-// =====================================
+
 
 async function loadProfile() {
 
@@ -126,10 +119,6 @@ async function loadProfile() {
 }
 
 
-// =====================================
-// SAVE PROFILE
-// =====================================
-
 document.getElementById("saveProfileBtn").addEventListener("click", async () => {
 
     console.log("SAVING PROFILE...");
@@ -173,14 +162,10 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
 });
 
 
-// =====================================
-// CHECK LOGIN WHEN PAGE LOADS
-// =====================================
+
 
 loadProfile();
-// =====================================
-// CREATE CAPSULE
-// =====================================
+loadCapsules();
 
 document.getElementById("createCapsuleBtn").addEventListener("click", async () => {
 
@@ -207,7 +192,7 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
     }
 
 
-    // Get logged-in user
+    
     const {
         data: { user },
         error: userError
@@ -262,3 +247,137 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
     document.getElementById("unlockDate").value = "";
 
 });
+
+
+async function loadCapsules() {
+
+    console.log("Loading capsules...");
+
+    const capsulesList =
+        document.getElementById("capsulesList");
+
+
+    
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    if (userError || !user) {
+
+        console.log("No logged-in user.");
+
+        capsulesList.innerHTML =
+            "<p>Please log in to see your capsules.</p>";
+
+        return;
+    }
+
+
+    
+    const { data: capsules, error } =
+        await supabaseClient
+            .from("capsules")
+            .select("*")
+            .eq("user_id", user.id)
+            .order("unlock_at", { ascending: true });
+
+
+    if (error) {
+
+        console.error("CAPSULE LOAD ERROR:", error);
+
+        capsulesList.innerHTML =
+            `<p>${error.message}</p>`;
+
+        return;
+    }
+
+
+    console.log("CAPSULES:", capsules);
+
+
+    
+    if (!capsules || capsules.length === 0) {
+
+        capsulesList.innerHTML =
+            "<p>You haven't created any capsules yet.</p>";
+
+        return;
+    }
+
+
+    
+    capsulesList.innerHTML = "";
+
+
+
+    const now = new Date();
+
+
+    
+    capsules.forEach(capsule => {
+
+        const unlockTime =
+            new Date(capsule.unlock_at);
+
+        const card =
+            document.createElement("div");
+
+        card.className = "capsule-card";
+
+
+    
+        if (unlockTime <= now) {
+
+            card.innerHTML = `
+                <h3>🔓 ${escapeHTML(capsule.title)}</h3>
+
+                <p>
+                    <strong>Unlocked</strong>
+                </p>
+
+                <p>
+                    ${escapeHTML(capsule.message)}
+                </p>
+
+                <small>
+                    Unlocked on:
+                    ${unlockTime.toLocaleString()}
+                </small>
+            `;
+
+        } else {
+
+            card.innerHTML = `
+                <h3>🔒 ${escapeHTML(capsule.title)}</h3>
+
+                <p>
+                    <strong>Locked</strong>
+                </p>
+
+                <p>
+                    Opens on:
+                    ${unlockTime.toLocaleString()}
+                </p>
+            `;
+        }
+
+
+        capsulesList.appendChild(card);
+
+    });
+}
+
+
+
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
