@@ -19,8 +19,6 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
         return;
     }
 
-    console.log("Sending signup request...");
-
     const { data, error } = await supabaseClient.auth.signUp({
         email: email,
         password: password
@@ -55,12 +53,11 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         return;
     }
 
-    console.log("Trying to log in...");
-
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
 
     if (error) {
         console.error("LOGIN ERROR:", error);
@@ -72,7 +69,6 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 
     message.textContent = "Login successful!";
 
-    // Load the profile after successful login
     await loadProfile();
 });
 
@@ -102,12 +98,14 @@ async function loadProfile() {
 
     console.log("Current user ID:", user.id);
 
-    const { data: profile, error: profileError } =
-        await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", user.id)
-            .single();
+    const {
+        data: profile,
+        error: profileError
+    } = await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
 
     if (profileError) {
         console.error("PROFILE ERROR:", profileError);
@@ -118,7 +116,61 @@ async function loadProfile() {
 
     message.textContent =
         `Welcome, ${profile.username}!`;
+
+    // Fill profile inputs
+    document.getElementById("usernameInput").value =
+        profile.username || "";
+
+    document.getElementById("fullNameInput").value =
+        profile.full_name || "";
 }
+
+
+// =====================================
+// SAVE PROFILE
+// =====================================
+
+document.getElementById("saveProfileBtn").addEventListener("click", async () => {
+
+    console.log("SAVING PROFILE...");
+
+    const username =
+        document.getElementById("usernameInput").value.trim();
+
+    const fullName =
+        document.getElementById("fullNameInput").value.trim();
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        message.textContent = "Please log in first.";
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("profiles")
+        .update({
+            username: username,
+            full_name: fullName
+        })
+        .eq("id", user.id);
+
+    if (error) {
+        console.error("PROFILE UPDATE ERROR:", error);
+        message.textContent = error.message;
+        return;
+    }
+
+    console.log("PROFILE UPDATED!");
+
+    message.textContent =
+        "Profile saved successfully!";
+
+    // Reload profile so the welcome message updates too
+    await loadProfile();
+});
 
 
 // =====================================
