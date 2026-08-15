@@ -321,6 +321,25 @@ function escapeHTML(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+    console.log("LOGGING OUT...");
+
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+        console.error("LOGOUT ERROR:", error);
+        message.textContent = error.message;
+        return;
+    }
+
+    console.log("LOGGED OUT");
+
+    message.textContent = "You have been logged out.";
+
+    document.getElementById("usernameInput").value = "";
+    document.getElementById("fullNameInput").value = "";
+    document.getElementById("capsulesList").innerHTML = "";
+});
 
 loadProfile();
 loadCapsules();
