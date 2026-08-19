@@ -3,8 +3,6 @@ console.log("SCRIPT LOADED");
 const message = document.getElementById("message");
 
 document.getElementById("signupBtn").addEventListener("click", async () => {
-    console.log("SIGNUP BUTTON CLICKED");
-
     const email = document.getElementById("signupEmail").value.trim();
     const password = document.getElementById("signupPassword").value;
 
@@ -14,8 +12,8 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
     }
 
     const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password
+        email,
+        password
     });
 
     if (error) {
@@ -29,8 +27,6 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
 });
 
 document.getElementById("loginBtn").addEventListener("click", async () => {
-    console.log("LOGIN BUTTON CLICKED");
-
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
 
@@ -39,10 +35,11 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         return;
     }
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
 
     if (error) {
         console.error("LOGIN ERROR:", error);
@@ -50,7 +47,6 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
         return;
     }
 
-    console.log("LOGGED IN USER:", data.user);
     message.textContent = "Login successful!";
 
     await loadProfile();
@@ -58,8 +54,6 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 });
 
 async function loadProfile() {
-    console.log("Checking for logged-in user...");
-
     const {
         data: { user },
         error: userError
@@ -71,11 +65,8 @@ async function loadProfile() {
     }
 
     if (!user) {
-        console.log("No user is currently logged in.");
         return;
     }
-
-    console.log("Current user ID:", user.id);
 
     const {
         data: profile,
@@ -91,8 +82,6 @@ async function loadProfile() {
         return;
     }
 
-    console.log("PROFILE:", profile);
-
     message.textContent = `Welcome, ${profile.username}!`;
 
     document.getElementById("usernameInput").value =
@@ -103,8 +92,6 @@ async function loadProfile() {
 }
 
 document.getElementById("saveProfileBtn").addEventListener("click", async () => {
-    console.log("SAVING PROFILE...");
-
     const username =
         document.getElementById("usernameInput").value.trim();
 
@@ -123,7 +110,7 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
     const { error } = await supabaseClient
         .from("profiles")
         .update({
-            username: username,
+            username,
             full_name: fullName
         })
         .eq("id", user.id);
@@ -134,15 +121,12 @@ document.getElementById("saveProfileBtn").addEventListener("click", async () => 
         return;
     }
 
-    console.log("PROFILE UPDATED!");
     message.textContent = "Profile saved successfully!";
 
     await loadProfile();
 });
 
 document.getElementById("createCapsuleBtn").addEventListener("click", async () => {
-    console.log("CREATING CAPSULE...");
-
     const title =
         document.getElementById("capsuleTitle").value.trim();
 
@@ -152,13 +136,15 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
     const unlockAt =
         document.getElementById("unlockDate").value;
 
+    const file =
+        document.getElementById("capsuleFile").files[0];
+
     const capsuleStatus =
         document.getElementById("capsuleStatus");
 
     if (!title || !capsuleText || !unlockAt) {
         capsuleStatus.textContent =
-            "Please fill in all the fields.";
-
+            "Please fill in the title, message and unlock time.";
         return;
     }
 
@@ -168,9 +154,49 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
     } = await supabaseClient.auth.getUser();
 
     if (userError || !user) {
-        console.error("USER ERROR:", userError);
         capsuleStatus.textContent = "Please log in first.";
         return;
+    }
+
+    let filePath = null;
+
+    if (file) {
+        const allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/gif"
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+            capsuleStatus.textContent =
+                "Please select a JPG, PNG, WEBP or GIF image.";
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            capsuleStatus.textContent =
+                "Image must be smaller than 5 MB.";
+            return;
+        }
+
+        const fileExtension =
+            file.name.split(".").pop().toLowerCase();
+
+        filePath =
+            `${user.id}/${crypto.randomUUID()}.${fileExtension}`;
+
+        const { error: uploadError } =
+            await supabaseClient.storage
+                .from("capsule-files")
+                .upload(filePath, file);
+
+        if (uploadError) {
+            console.error("UPLOAD ERROR:", uploadError);
+            capsuleStatus.textContent =
+                uploadError.message;
+            return;
+        }
     }
 
     const { data, error } =
@@ -178,15 +204,23 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
             .from("capsules")
             .insert({
                 user_id: user.id,
-                title: title,
+                title,
                 message: capsuleText,
-                unlock_at: unlockAt
+                unlock_at: unlockAt,
+                file_path: filePath
             })
             .select()
             .single();
 
     if (error) {
         console.error("CAPSULE ERROR:", error);
+
+        if (filePath) {
+            await supabaseClient.storage
+                .from("capsule-files")
+                .remove([filePath]);
+        }
+
         capsuleStatus.textContent = error.message;
         return;
     }
@@ -199,13 +233,12 @@ document.getElementById("createCapsuleBtn").addEventListener("click", async () =
     document.getElementById("capsuleTitle").value = "";
     document.getElementById("capsuleMessage").value = "";
     document.getElementById("unlockDate").value = "";
+    document.getElementById("capsuleFile").value = "";
 
     await loadCapsules();
 });
 
 async function loadCapsules() {
-    console.log("Loading capsules...");
-
     const capsulesList =
         document.getElementById("capsulesList");
 
@@ -234,8 +267,6 @@ async function loadCapsules() {
         return;
     }
 
-    console.log("CAPSULES:", capsules);
-
     if (!capsules || capsules.length === 0) {
         capsulesList.innerHTML =
             "<p>You haven't created any capsules yet.</p>";
@@ -248,8 +279,11 @@ async function loadCapsules() {
         const card = document.createElement("div");
         card.className = "capsule-card";
 
-        const unlockTime = new Date(capsule.unlock_at);
-        const now = new Date();
+        const unlockTime =
+            new Date(capsule.unlock_at);
+
+        const now =
+            new Date();
 
         if (unlockTime <= now) {
             card.innerHTML = `
@@ -258,6 +292,10 @@ async function loadCapsules() {
                 <p>${escapeHTML(capsule.message)}</p>
                 <small>Unlocked on: ${unlockTime.toLocaleString()}</small>
             `;
+
+            if (capsule.file_path) {
+                addPrivateImage(card, capsule.file_path);
+            }
 
             capsulesList.appendChild(card);
         } else {
@@ -279,7 +317,7 @@ function startCountdown(capsule, card, unlockTime) {
     const countdown =
         document.getElementById(`countdown-${capsule.id}`);
 
-    const timer = setInterval(() => {
+    const timer = setInterval(async () => {
         const now = new Date();
         const difference = unlockTime - now;
 
@@ -292,6 +330,10 @@ function startCountdown(capsule, card, unlockTime) {
                 <p>${escapeHTML(capsule.message)}</p>
                 <small>Unlocked just now.</small>
             `;
+
+            if (capsule.file_path) {
+                addPrivateImage(card, capsule.file_path);
+            }
 
             return;
         }
@@ -316,14 +358,33 @@ function startCountdown(capsule, card, unlockTime) {
     }, 1000);
 }
 
+async function addPrivateImage(card, filePath) {
+    const { data, error } =
+        await supabaseClient.storage
+            .from("capsule-files")
+            .createSignedUrl(filePath, 3600);
+
+    if (error) {
+        console.error("IMAGE URL ERROR:", error);
+        return;
+    }
+
+    const image = document.createElement("img");
+
+    image.src = data.signedUrl;
+    image.alt = "FutureSelf capsule photo";
+    image.style.maxWidth = "100%";
+
+    card.appendChild(image);
+}
+
 function escapeHTML(text) {
     const div = document.createElement("div");
     div.textContent = text;
     return div.innerHTML;
 }
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-    console.log("LOGGING OUT...");
 
+document.getElementById("logoutBtn").addEventListener("click", async () => {
     const { error } = await supabaseClient.auth.signOut();
 
     if (error) {
@@ -331,8 +392,6 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
         message.textContent = error.message;
         return;
     }
-
-    console.log("LOGGED OUT");
 
     message.textContent = "You have been logged out.";
 
