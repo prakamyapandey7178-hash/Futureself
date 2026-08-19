@@ -400,5 +400,23 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     document.getElementById("capsulesList").innerHTML = "";
 });
 
+const capsuleChannel = supabaseClient
+    .channel("capsules-realtime")
+    .on(
+        "postgres_changes",
+        {
+            event: "*",
+            schema: "public",
+            table: "capsules"
+        },
+        payload => {
+            console.log("REALTIME CAPSULE CHANGE:", payload);
+            loadCapsules();
+        }
+    )
+    .subscribe(status => {
+        console.log("REALTIME STATUS:", status);
+    });
+    
 loadProfile();
 loadCapsules();
