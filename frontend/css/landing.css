@@ -1,0 +1,458 @@
+:root {
+    --night: #11152f;
+    --night-soft: #1b2042;
+    --lavender: #9b8acb;
+    --pink: #d9a8bb;
+    --cream: #fff5e8;
+    --gold: #f2d58b;
+    --text: #fff7ef;
+    --muted: #c9c4d6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--night);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 22px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(17, 21, 47, 0.82);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.logo {
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--cream);
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.hero {
+    min-height: 92vh;
+    padding: 80px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 75% 35%, rgba(155, 138, 203, 0.22), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(217, 168, 187, 0.12), transparent 30%),
+        var(--night);
+}
+
+.hero::before {
+    content: "✦     ·       ✧          ·    ✦       ·       ✧     ·";
+    position: absolute;
+    inset: 30px 0 auto 0;
+    text-align: center;
+    color: rgba(242, 213, 139, 0.6);
+    font-size: 1rem;
+    letter-spacing: 24px;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 620px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: clamp(3.5rem, 7vw, 6.8rem);
+    line-height: 0.95;
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    margin-bottom: 28px;
+}
+
+.hero h1 em {
+    color: var(--pink);
+    font-weight: 400;
+}
+
+.hero p {
+    max-width: 500px;
+    color: var(--muted);
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 25px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--cream);
+    color: var(--night);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 245, 232, 0.16);
+}
+
+.btn-secondary {
+    border: 1px solid rgba(255, 245, 232, 0.3);
+    color: var(--cream);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 245, 232, 0.08);
+    transform: translateY(-3px);
+}
+
+.hero-visual {
+    width: min(430px, 90vw);
+    aspect-ratio: 1;
+    position: relative;
+    transition: transform 0.2s ease-out;
+}
+
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 15%;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #d9c9ed, transparent 8%),
+        radial-gradient(circle at 65% 65%, #c7a4c2, transparent 12%),
+        radial-gradient(circle at 50% 50%, #65598f, #292d5d 65%, transparent 66%);
+    box-shadow:
+        0 0 70px rgba(155, 138, 203, 0.25),
+        0 0 150px rgba(217, 168, 187, 0.1);
+}
+
+.hero-visual::after {
+    content: "✦     ·   ✧        ·     ✦       ·";
+    position: absolute;
+    inset: 5% 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 12px;
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+section {
+    padding: 120px 7%;
+}
+
+.section-label {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    margin-bottom: 18px;
+}
+
+section h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.how-section {
+    background:
+        radial-gradient(circle at 80% 20%, rgba(155, 138, 203, 0.12), transparent 25%),
+        var(--night-soft);
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 65px;
+}
+
+.step {
+    padding: 35px;
+    border-top: 1px solid rgba(255, 245, 232, 0.2);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.step:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+}
+
+.step-number {
+    color: var(--gold);
+    font-size: 0.8rem;
+    margin-bottom: 35px;
+}
+
+.step h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.step p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.diary-section {
+    background:
+        radial-gradient(circle at 20% 50%, rgba(217, 168, 187, 0.1), transparent 28%),
+        var(--night);
+}
+
+.diary-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.diary-copy p {
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 480px;
+}
+
+.diary-card {
+    background: var(--cream);
+    color: var(--night);
+    padding: 45px;
+    min-height: 330px;
+    border-radius: 3px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+    transform: rotate(2deg);
+    transition: transform 0.5s ease;
+}
+
+.diary-card:hover {
+    transform: rotate(0deg) translateY(-8px);
+}
+
+.diary-card small {
+    color: #777083;
+    letter-spacing: 0.12em;
+}
+
+.diary-card h3 {
+    margin: 35px 0 25px;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.diary-card p {
+    color: #4c4854;
+    line-height: 1.8;
+}
+
+.quote-section {
+    text-align: center;
+    background: var(--pink);
+    color: var(--night);
+}
+
+.quote-section blockquote {
+    max-width: 850px;
+    margin: auto;
+    font-size: clamp(2rem, 4vw, 3.7rem);
+    line-height: 1.2;
+    font-style: italic;
+}
+
+.quote-section cite {
+    display: block;
+    margin-top: 25px;
+    font-size: 0.85rem;
+    font-style: normal;
+}
+
+.cta-section {
+    text-align: center;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(155, 138, 203, 0.22), transparent 35%),
+        var(--night);
+}
+
+.cta-section p {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 35px;
+    line-height: 1.8;
+}
+
+.footer {
+    padding: 35px 7%;
+    border-top: 1px solid rgba(255, 245, 232, 0.1);
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        padding: 18px 5%;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 80px 7% 100px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero p {
+        margin: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        width: 300px;
+    }
+
+    section {
+        padding: 90px 7%;
+    }
+
+    .steps,
+    .diary-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .diary-layout {
+        gap: 60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .nav-links {
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links a:nth-child(1) {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .diary-card {
+        padding: 30px;
+    }
+}

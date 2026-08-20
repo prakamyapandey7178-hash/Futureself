@@ -4,127 +4,298 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FutureSelf</title>
+    <title>FutureSelf — Write to who you're becoming</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/landing.css">
 </head>
 
 <body>
 
-    <h1>FutureSelf</h1>
+    <header class="navbar">
 
-    <div>
-        <h2>Create Account</h2>
+        <a href="index.html" class="logo">
+            Future<span>Self</span>
+        </a>
 
-        <input
-            type="email"
-            id="signupEmail"
-            placeholder="Email"
-        >
+        <nav class="nav-links">
+            <a href="#how-it-works">How it works</a>
+            <a href="#features">Features</a>
+        </nav>
 
-        <input
-            type="password"
-            id="signupPassword"
-            placeholder="Password"
-        >
+        <div class="nav-actions">
+            <a href="pages/login.html" class="login-link">Log in</a>
+            <a href="pages/signup.html" class="nav-button">Start writing</a>
+        </div>
 
-        <button id="signupBtn">Sign Up</button>
-    </div>
+    </header>
 
 
-    <div>
-        <h2>Login</h2>
+    <main>
 
-        <input
-            type="email"
-            id="loginEmail"
-            placeholder="Email"
-        >
+        <section class="hero">
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password"
-        >
+            <div class="hero-content">
 
-        <button id="loginBtn">Login</button>
-    </div>
-    <div id="profileSection">
+                <div class="eyebrow">
+                    A space for your future self
+                </div>
 
-    <h2>My Profile</h2>
+                <h1>
+                    Write to the
+                    <span>person you're becoming.</span>
+                </h1>
 
-    <input
-        type="text"
-        id="usernameInput"
-        placeholder="Username"
-    >
+                <p class="hero-description">
+                    Save your thoughts, dreams, memories and promises.
+                    Open them when the future arrives.
+                </p>
 
-    <input
-        type="text"
-        id="fullNameInput"
-        placeholder="Full name"
-    >
+                <div class="hero-actions">
+                    <a href="pages/signup.html" class="primary-button">
+                        Begin your journey
+                        <span>→</span>
+                    </a>
 
-    <button id="saveProfileBtn">Save Profile</button>
+                    <a href="#how-it-works" class="secondary-button">
+                        See how it works
+                    </a>
+                </div>
 
-</div>
-<button id="logoutBtn">Logout</button>
-<div id="capsuleSelection">
+                <div class="hero-note">
+                    <span>✦</span>
+                    Your memories. Your future. Your space.
+                </div>
 
-    <h2>Create a Time Capsule</h2>
-
-    <input
-        type="text"
-        id="capsuleTitle"
-        placeholder="Capsule title"
-    >
-
-    <textarea
-        id="capsuleMessage"
-        placeholder="Write something for your future self..."
-        rows="6"
-    ></textarea>
-
-    <label for="unlockDate">
-        When should this capsule unlock?
-    </label>
-
-    <input
-        type="datetime-local"
-        id="unlockDate"
-    >
-
-    <button id="createCapsuleBtn">
-        Lock Capsule 🔒
-    </button>
-
-</div>
-<label for="capsuleFile">
-    Add a photo
-</label>
-
-<input
-    type="file"
-    id="capsuleFile"
-    accept="image/*"
->
-
-<div id="capsuleStatus"></div>
+            </div>
 
 
-    <p id="message"></p>
-    <div id="myCapsulesSection">
+            <div class="hero-visual">
 
-    <h2>My Capsules</h2>
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
 
-    <div id="capsulesList"></div>
+                <div class="memory-card card-back">
+                    <div class="card-line"></div>
+                    <div class="card-line short"></div>
+                </div>
 
-</div>
+                <div class="memory-card card-main">
+
+                    <div class="card-top">
+                        <span>Dear Future Me</span>
+                        <span>✦</span>
+                    </div>
+
+                    <div class="card-date">
+                        AUGUST 19, 2026
+                    </div>
+
+                    <p>
+                        I hope you remember how excited
+                        you were to become the person
+                        you're dreaming about.
+                    </p>
+
+                    <div class="card-footer">
+                        <span>For you, someday.</span>
+                        <span>♡</span>
+                    </div>
+
+                </div>
+
+                <div class="floating-note note-one">
+                    <span>🔒</span>
+                    <div>
+                        <strong>Time capsule</strong>
+                        <small>Opens in 365 days</small>
+                    </div>
+                </div>
+
+                <div class="floating-note note-two">
+                    <span>✍️</span>
+                    <div>
+                        <strong>Dear Diary</strong>
+                        <small>Write about today</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js"></script>
-    <script src="script.js"></script>
+        <section class="quote-section">
+
+            <p>
+                "The future belongs to those who believe in the beauty of their dreams."
+            </p>
+
+            <span>— Eleanor Roosevelt</span>
+
+        </section>
+
+
+        <section class="how-section" id="how-it-works">
+
+            <div class="section-heading">
+
+                <span class="section-label">HOW IT WORKS</span>
+
+                <h2>
+                    Give today's thoughts
+                    <em>a tomorrow.</em>
+                </h2>
+
+            </div>
+
+            <div class="steps">
+
+                <div class="step">
+                    <span class="step-number">01</span>
+                    <h3>Write</h3>
+                    <p>
+                        Capture what's on your mind,
+                        from tiny moments to your biggest dreams.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">02</span>
+                    <h3>Lock</h3>
+                    <p>
+                        Choose when your words should
+                        find their way back to you.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">03</span>
+                    <h3>Remember</h3>
+                    <p>
+                        Return to your memories and
+                        see how far you've come.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="features-section" id="features">
+
+            <div class="feature-card diary-card">
+
+                <div>
+                    <span class="section-label">DEAR DIARY</span>
+
+                    <h2>
+                        Keep a record
+                        of <em>today.</em>
+                    </h2>
+
+                    <p>
+                        A private space for everyday thoughts,
+                        feelings, memories and moments worth keeping.
+                    </p>
+                </div>
+
+                <div class="mini-diary">
+                    <div class="mini-diary-top">
+                        <span>Wednesday</span>
+                        <span>19.08.26</span>
+                    </div>
+
+                    <p>
+                        Today I started building something
+                        that feels like it could become mine.
+                    </p>
+
+                    <div class="mood">
+                        Feeling
+                        <span>☀️</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="feature-card capsule-card-feature">
+
+                <span class="section-label">TIME CAPSULES</span>
+
+                <h2>
+                    Send a message
+                    <em>through time.</em>
+                </h2>
+
+                <p>
+                    Write something today. Choose a date.
+                    Let FutureSelf keep it safe until you're ready.
+                </p>
+
+                <div class="capsule-preview">
+                    <span>🔒</span>
+                    <div>
+                        <strong>Open when you're 20</strong>
+                        <small>Unlocks May 19, 2027</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="cta-section">
+
+            <div class="cta-content">
+
+                <span class="section-label">YOUR STORY IS STILL UNWRITTEN</span>
+
+                <h2>
+                    Start writing
+                    <em>to yourself.</em>
+                </h2>
+
+                <p>
+                    Because someday, you'll want to remember
+                    who you were today.
+                </p>
+
+                <a href="pages/signup.html" class="primary-button">
+                    Create your FutureSelf
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            Future<span>Self</span>
+        </div>
+
+        <p>
+            For the person you're becoming.
+        </p>
+
+        <span>
+            © 2026 FutureSelf
+        </span>
+
+    </footer>
+
+<script src="js/landing.js"></script>
 
 </body>
 </html>
