@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Time Capsules — FutureSelf</title>
+
+    <link rel="stylesheet" href="../css/landing.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">FutureSelf</a>
+
+        <div class="nav-links">
+            <a href="space.html">My Space</a>
+            <a href="diary.html">Dear Diary</a>
+            <a href="capsules.html">Time Capsules</a>
+            <a href="#" id="logoutBtn">Log out</a>
+        </div>
+    </nav>
+
+    <main class="capsules-page">
+
+        <section class="capsules-intro">
+            <div class="section-label">✦ A message across time</div>
+
+            <h1>Time Capsules<span>.</span></h1>
+
+            <p>
+                Leave something behind for the person you're becoming.
+                Choose a date, seal your thoughts, and let time do the rest.
+            </p>
+        </section>
+
+        <section class="capsule-editor">
+
+            <div class="section-label">✦ CREATE A CAPSULE</div>
+
+            <input
+                type="text"
+                id="capsuleTitle"
+                placeholder="Give your capsule a name..."
+            >
+
+            <textarea
+                id="capsuleContent"
+                placeholder="Dear future me..."
+            ></textarea>
+
+            <div class="unlock-area">
+
+                <div>
+                    <label for="unlockDate">Open this capsule on</label>
+
+                    <input
+                        type="datetime-local"
+                        id="unlockDate"
+                    >
+                </div>
+
+                <button
+                    type="button"
+                    id="saveCapsuleBtn"
+                    class="btn btn-primary"
+                >
+                    Seal capsule ✦
+                </button>
+
+            </div>
+
+            <p id="capsuleMessage"></p>
+
+        </section>
+
+        <section class="capsules-list-section">
+
+            <div class="section-label">✦ YOUR CAPSULES</div>
+
+            <h2>Messages waiting in time</h2>
+
+            <div id="capsulesContainer" class="capsules-container">
+                <p class="empty-message">
+                    Your sealed messages will appear here.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase.js"></script>
+    <script src="../js/capsules.js"></script>
+
+</body>
+</html>

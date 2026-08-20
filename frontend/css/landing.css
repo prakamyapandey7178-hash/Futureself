@@ -846,3 +846,219 @@ section h2 {
         padding: 0;
     }
 }
+.capsules-page {
+    min-height: 100vh;
+    padding-bottom: 110px;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(155, 138, 203, 0.16), transparent 28%),
+        radial-gradient(circle at 80% 65%, rgba(217, 168, 187, 0.1), transparent 25%),
+        var(--night);
+}
+
+.capsules-intro {
+    max-width: 850px;
+    margin: auto;
+    padding: 100px 7% 60px;
+}
+
+.capsules-intro h1 {
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.capsules-intro h1 span {
+    color: var(--pink);
+}
+
+.capsules-intro p {
+    max-width: 540px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.capsule-editor {
+    width: min(850px, 86%);
+    margin: 0 auto;
+    padding: 42px;
+    background: rgba(255, 245, 232, 0.055);
+    border: 1px solid rgba(255, 245, 232, 0.13);
+    border-radius: 18px;
+    backdrop-filter: blur(16px);
+}
+
+.capsule-editor .section-label {
+    margin-bottom: 30px;
+}
+
+#capsuleTitle {
+    width: 100%;
+    padding: 15px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 245, 232, 0.15);
+    outline: none;
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 1.6rem;
+}
+
+#capsuleTitle::placeholder,
+#capsuleContent::placeholder {
+    color: rgba(255, 245, 232, 0.4);
+}
+
+#capsuleContent {
+    width: 100%;
+    min-height: 260px;
+    padding: 25px 0;
+    resize: vertical;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.unlock-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 245, 232, 0.1);
+}
+
+.unlock-area label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+#unlockDate {
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 245, 232, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 245, 232, 0.06);
+    color: var(--cream);
+    font-family: inherit;
+    outline: none;
+}
+
+#capsuleMessage {
+    min-height: 20px;
+    margin-top: 18px;
+    color: var(--gold);
+    font-size: 0.85rem;
+}
+
+.capsules-list-section {
+    max-width: 850px;
+    margin: 110px auto 0;
+    padding: 0 7%;
+}
+
+.capsules-list-section h2 {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.capsules-container {
+    display: grid;
+    gap: 20px;
+}
+
+.capsule-card {
+    padding: 32px;
+    border-radius: 16px;
+    transition: transform 0.35s ease;
+}
+
+.capsule-card:hover {
+    transform: translateY(-5px);
+}
+
+.capsule-card.locked {
+    background:
+        radial-gradient(circle at 80% 20%, rgba(155, 138, 203, 0.16), transparent 30%),
+        rgba(255, 245, 232, 0.045);
+    border: 1px solid rgba(255, 245, 232, 0.12);
+}
+
+.capsule-card.unlocked {
+    background: var(--cream);
+    color: var(--night);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.18);
+}
+
+.capsule-status {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 15px;
+    color: var(--gold);
+}
+
+.unlocked .capsule-status {
+    color: #8c6e39;
+}
+
+.capsule-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+.unlocked .capsule-date {
+    color: #777083;
+}
+
+.capsule-card h3 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.capsule-card p {
+    line-height: 1.8;
+}
+
+.locked-message {
+    color: var(--muted);
+    font-style: italic;
+}
+
+.unlocked p {
+    color: #403d47;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 650px) {
+    .capsules-intro {
+        padding-top: 70px;
+    }
+
+    .capsule-editor {
+        width: 90%;
+        padding: 28px;
+    }
+
+    .unlock-area {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #unlockDate {
+        width: 100%;
+    }
+
+    .capsules-list-section {
+        width: 90%;
+        padding: 0;
+    }
+}
