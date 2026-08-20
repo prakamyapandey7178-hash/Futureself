@@ -16,7 +16,7 @@
 
         <div class="nav-links">
             <a href="space.html">My Space</a>
-            <a href="diary.html">Dear Diary</a>
+            <a href="diary.html" class="active">Dear Diary</a>
             <a href="capsules.html">Time Capsules</a>
             <a href="#" id="logoutBtn">Log out</a>
         </div>
@@ -42,18 +42,27 @@
                     <span class="section-label">TODAY</span>
                     <p id="todayDate"></p>
                 </div>
+
+                <span class="editor-symbol">✦</span>
             </div>
 
             <input
                 type="text"
                 id="diaryTitle"
+                maxlength="100"
                 placeholder="Give this moment a name..."
             >
 
             <textarea
                 id="diaryContent"
+                maxlength="5000"
                 placeholder="Dear diary..."
             ></textarea>
+
+            <div class="writing-meta">
+                <span id="characterCount">0 / 5000</span>
+                <span id="wordCount">0 words</span>
+            </div>
 
             <div class="editor-footer">
 
@@ -73,19 +82,130 @@
 
         <section class="entries-section">
 
-            <div class="section-label">✦ YOUR MEMORIES</div>
+            <div class="entries-heading">
+                <div>
+                    <div class="section-label">✦ YOUR MEMORIES</div>
+                    <h2>Past entries</h2>
+                </div>
 
-            <h2>Past entries</h2>
+                <span id="entryCount" class="entry-count">0 memories</span>
+            </div>
 
             <div id="entriesContainer" class="entries-container">
-                <p class="empty-message">
-                    Your little collection of memories will appear here.
-                </p>
+
+                <div class="empty-message">
+                    <span>✦</span>
+                    <h3>Your story starts here.</h3>
+                    <p>
+                        Write something today and it will become
+                        a little piece of your universe.
+                    </p>
+                </div>
+
             </div>
 
         </section>
 
     </main>
+
+    <div id="editModal" class="diary-modal">
+
+        <div class="diary-modal-content">
+
+            <button
+                type="button"
+                id="closeEditModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+            <div class="section-label">✦ EDIT MEMORY</div>
+
+            <h2>Change your words.</h2>
+
+            <input
+                type="text"
+                id="editTitle"
+                maxlength="100"
+                placeholder="Title"
+            >
+
+            <textarea
+                id="editContent"
+                maxlength="5000"
+                placeholder="Your thoughts..."
+            ></textarea>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelEditBtn"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    id="updateDiaryBtn"
+                    class="btn btn-primary"
+                >
+                    Save changes ✦
+                </button>
+
+            </div>
+
+            <p id="editMessage"></p>
+
+        </div>
+
+    </div>
+
+    <div id="deleteModal" class="diary-modal">
+
+        <div class="diary-modal-content delete-modal">
+
+            <button
+                type="button"
+                id="closeDeleteModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+            <div class="section-label">✦ LETTING GO</div>
+
+            <h2>Delete this memory?</h2>
+
+            <p>
+                This entry will be removed from your diary forever.
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelDeleteBtn"
+                    class="btn btn-secondary"
+                >
+                    Keep it
+                </button>
+
+                <button
+                    type="button"
+                    id="confirmDeleteBtn"
+                    class="btn btn-danger"
+                >
+                    Delete memory
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../supabase.js"></script>

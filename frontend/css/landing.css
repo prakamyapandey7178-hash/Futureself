@@ -1318,3 +1318,235 @@ section h2 {
         font-size: 1.7rem;
     }
 }
+.diary-editor {
+    position: relative;
+}
+
+.editor-symbol {
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+.writing-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.7rem;
+}
+
+.entries-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.entry-count {
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+}
+
+.entry-card {
+    padding: 28px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 245, 232, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 245, 232, 0.035);
+    transition: 0.3s ease;
+}
+
+.entry-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(242, 213, 139, 0.25);
+    background: rgba(255, 245, 232, 0.055);
+}
+
+.entry-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.entry-date {
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+}
+
+.entry-card h3 {
+    margin-top: 9px;
+    font-size: 1.35rem;
+    font-weight: 400;
+}
+
+.entry-content {
+    margin-top: 20px;
+    color: var(--muted);
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.entry-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.entry-actions button {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.entry-actions button:hover {
+    color: var(--gold);
+}
+
+.entry-actions .entry-delete:hover {
+    color: #d98b9b;
+}
+
+.empty-message {
+    padding: 55px 25px;
+    text-align: center;
+    border: 1px dashed rgba(255, 245, 232, 0.13);
+    border-radius: 16px;
+}
+
+.empty-message span {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+.empty-message h3 {
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.empty-message p {
+    max-width: 400px;
+    margin: auto;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+}
+
+.diary-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(8, 7, 18, 0.78);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s ease;
+}
+
+.diary-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.diary-modal-content {
+    position: relative;
+    width: min(600px, 100%);
+    padding: 40px;
+    border: 1px solid rgba(255, 245, 232, 0.12);
+    border-radius: 18px;
+    background: #171527;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+
+.diary-modal-content h2 {
+    margin: 10px 0 25px;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.diary-modal-content textarea {
+    min-height: 220px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: var(--gold);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn-secondary,
+.btn-danger {
+    border: 1px solid rgba(255, 245, 232, 0.15);
+    background: transparent;
+    color: var(--muted);
+}
+
+.btn-danger {
+    color: #d98b9b;
+    border-color: rgba(217, 139, 155, 0.3);
+}
+
+.btn-danger:hover {
+    background: rgba(217, 139, 155, 0.08);
+}
+
+.delete-modal > p {
+    margin-bottom: 25px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+    .entry-top {
+        flex-direction: column;
+    }
+
+    .entry-actions {
+        justify-content: flex-start;
+    }
+
+    .entries-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .diary-modal-content {
+        padding: 30px 22px;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+}
