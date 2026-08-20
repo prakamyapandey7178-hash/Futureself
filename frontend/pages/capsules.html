@@ -17,7 +17,7 @@
         <div class="nav-links">
             <a href="space.html">My Space</a>
             <a href="diary.html">Dear Diary</a>
-            <a href="capsules.html">Time Capsules</a>
+            <a href="capsules.html" class="active">Time Capsules</a>
             <a href="#" id="logoutBtn">Log out</a>
         </div>
     </nav>
@@ -25,6 +25,7 @@
     <main class="capsules-page">
 
         <section class="capsules-intro">
+
             <div class="section-label">✦ A message across time</div>
 
             <h1>Time Capsules<span>.</span></h1>
@@ -33,32 +34,62 @@
                 Leave something behind for the person you're becoming.
                 Choose a date, seal your thoughts, and let time do the rest.
             </p>
+
+            <div class="capsule-count">
+                <span id="capsuleCount">0</span> messages floating through time
+            </div>
+
         </section>
 
         <section class="capsule-editor">
 
-            <div class="section-label">✦ CREATE A CAPSULE</div>
+            <div class="editor-top">
+
+                <div>
+                    <div class="section-label">✦ CREATE A CAPSULE</div>
+
+                    <h2>
+                        A little message<br>
+                        for another you.
+                    </h2>
+                </div>
+
+                <div class="capsule-editor-symbol">✦</div>
+
+            </div>
 
             <input
                 type="text"
                 id="capsuleTitle"
+                maxlength="100"
                 placeholder="Give your capsule a name..."
             >
 
             <textarea
                 id="capsuleContent"
+                maxlength="5000"
                 placeholder="Dear future me..."
             ></textarea>
 
+            <div class="capsule-writing-meta">
+                <span id="capsuleCharacterCount">0 / 5000</span>
+                <span id="capsuleWordCount">0 words</span>
+            </div>
+
             <div class="unlock-area">
 
-                <div>
-                    <label for="unlockDate">Open this capsule on</label>
+                <div class="unlock-input">
+
+                    <label for="unlockDate">
+                        <span>✦</span>
+                        Open this capsule on
+                    </label>
 
                     <input
                         type="datetime-local"
                         id="unlockDate"
                     >
+
                 </div>
 
                 <button
@@ -77,19 +108,67 @@
 
         <section class="capsules-list-section">
 
-            <div class="section-label">✦ YOUR CAPSULES</div>
+            <div class="capsules-heading">
 
-            <h2>Messages waiting in time</h2>
+                <div>
+                    <div class="section-label">✦ YOUR CAPSULES</div>
+
+                    <h2>Messages waiting in time</h2>
+                </div>
+
+                <span id="sealedCount" class="sealed-count">
+                    0 sealed
+                </span>
+
+            </div>
 
             <div id="capsulesContainer" class="capsules-container">
-                <p class="empty-message">
-                    Your sealed messages will appear here.
-                </p>
+
+                <div class="empty-message">
+                    <span>✦</span>
+                    <h3>Nothing is waiting yet.</h3>
+                    <p>
+                        Send a message to your future self
+                        and let time carry it forward.
+                    </p>
+                </div>
+
             </div>
 
         </section>
 
     </main>
+
+    <div id="capsuleModal" class="diary-modal">
+
+        <div class="diary-modal-content capsule-modal">
+
+            <button
+                type="button"
+                id="closeCapsuleModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+            <div class="section-label">✦ A MESSAGE FROM THE PAST</div>
+
+            <div class="opened-capsule-date" id="openedCapsuleDate"></div>
+
+            <h2 id="openedCapsuleTitle"></h2>
+
+            <div
+                class="opened-capsule-content"
+                id="openedCapsuleContent"
+            ></div>
+
+            <div class="opened-capsule-footer">
+                You made it here. ✦
+            </div>
+
+        </div>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../supabase.js"></script>

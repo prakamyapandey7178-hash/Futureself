@@ -1550,3 +1550,263 @@ section h2 {
         width: 100%;
     }
 }
+.capsule-count {
+    margin-top: 25px;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+.capsule-count span {
+    color: var(--gold);
+}
+
+.capsule-editor {
+    position: relative;
+    overflow: hidden;
+}
+
+.editor-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.editor-top h2 {
+    margin-top: 10px;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    font-weight: 400;
+}
+
+.capsule-editor-symbol {
+    color: var(--gold);
+    font-size: 2rem;
+}
+
+.capsule-writing-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.7rem;
+}
+
+.unlock-area {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.unlock-input {
+    flex: 1;
+}
+
+.unlock-input label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+.unlock-input label span {
+    color: var(--gold);
+}
+
+.unlock-input input {
+    width: 100%;
+}
+
+.capsules-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.capsules-heading h2 {
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.sealed-count {
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+}
+
+.capsules-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.capsule-card {
+    position: relative;
+    padding: 28px;
+    border-radius: 17px;
+    border: 1px solid rgba(255, 245, 232, 0.1);
+    transition: 0.3s ease;
+}
+
+.capsule-card.locked {
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(155, 138, 203, 0.13),
+            transparent 35%
+        ),
+        rgba(255, 245, 232, 0.035);
+}
+
+.capsule-card.unlocked {
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(242, 213, 139, 0.12),
+            transparent 35%
+        ),
+        rgba(255, 245, 232, 0.045);
+}
+
+.capsule-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(242, 213, 139, 0.25);
+}
+
+.capsule-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.capsule-status {
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+}
+
+.capsule-delete {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.68rem;
+    cursor: pointer;
+}
+
+.capsule-delete:hover {
+    color: #d98b9b;
+}
+
+.capsule-date {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    line-height: 1.6;
+}
+
+.capsule-card h3 {
+    margin-top: 10px;
+    font-size: 1.35rem;
+    font-weight: 400;
+}
+
+.locked-message,
+.capsule-preview {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+
+.capsule-countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: rgba(155, 138, 203, 0.1);
+    color: var(--pink);
+    font-size: 0.7rem;
+}
+
+.capsule-countdown span {
+    color: var(--gold);
+}
+
+.open-capsule {
+    margin-top: 22px;
+    border: 0;
+    background: transparent;
+    color: var(--gold);
+    font-family: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.open-capsule:hover {
+    text-decoration: underline;
+}
+
+.capsule-modal {
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.opened-capsule-date {
+    margin-top: 15px;
+    color: var(--gold);
+    font-size: 0.7rem;
+}
+
+.opened-capsule-content {
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 12px;
+    background: rgba(255, 245, 232, 0.035);
+    color: var(--muted);
+    line-height: 1.9;
+    white-space: pre-wrap;
+}
+
+.opened-capsule-footer {
+    margin-top: 25px;
+    color: var(--gold);
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+@media (max-width: 700px) {
+    .unlock-area {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .unlock-area button {
+        width: 100%;
+    }
+
+    .capsules-container {
+        grid-template-columns: 1fr;
+    }
+
+    .capsules-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .capsules-heading h2 {
+        font-size: 1.7rem;
+    }
+
+    .editor-top h2 {
+        font-size: 1.5rem;
+    }
+}
