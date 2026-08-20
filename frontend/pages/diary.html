@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dear Diary — FutureSelf</title>
+
+    <link rel="stylesheet" href="../css/landing.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">FutureSelf</a>
+
+        <div class="nav-links">
+            <a href="space.html">My Space</a>
+            <a href="diary.html">Dear Diary</a>
+            <a href="capsules.html">Time Capsules</a>
+            <a href="#" id="logoutBtn">Log out</a>
+        </div>
+    </nav>
+
+    <main class="diary-page">
+
+        <section class="diary-intro">
+            <div class="section-label">✦ A quiet corner of your universe</div>
+
+            <h1>Dear Diary<span>.</span></h1>
+
+            <p>
+                Write freely. No rules, no expectations.
+                Just you and your thoughts.
+            </p>
+        </section>
+
+        <section class="diary-editor">
+
+            <div class="editor-header">
+                <div>
+                    <span class="section-label">TODAY</span>
+                    <p id="todayDate"></p>
+                </div>
+            </div>
+
+            <input
+                type="text"
+                id="diaryTitle"
+                placeholder="Give this moment a name..."
+            >
+
+            <textarea
+                id="diaryContent"
+                placeholder="Dear diary..."
+            ></textarea>
+
+            <div class="editor-footer">
+
+                <p id="diaryMessage"></p>
+
+                <button
+                    type="button"
+                    id="saveDiaryBtn"
+                    class="btn btn-primary"
+                >
+                    Save entry ✦
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="entries-section">
+
+            <div class="section-label">✦ YOUR MEMORIES</div>
+
+            <h2>Past entries</h2>
+
+            <div id="entriesContainer" class="entries-container">
+                <p class="empty-message">
+                    Your little collection of memories will appear here.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase.js"></script>
+    <script src="../js/diary.js"></script>
+
+</body>
+</html>
