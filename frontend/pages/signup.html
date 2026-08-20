@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Begin Your Journey — FutureSelf</title>
+
+    <link rel="stylesheet" href="../css/landing.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">FutureSelf</a>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="login.html">Log in</a>
+        </div>
+    </nav>
+
+    <main class="auth-page">
+
+        <div class="auth-card">
+
+            <div class="section-label">✦ Your story begins here</div>
+
+            <h1>Create your space.</h1>
+
+            <p>
+                A quiet little corner of the universe
+                for your thoughts, dreams and future self.
+            </p>
+
+            <div class="auth-form">
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="Your email"
+                >
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create a password"
+                >
+
+                <button
+                    type="button"
+                    id="signupBtn"
+                    class="btn btn-primary"
+                >
+                    Create my space ✦
+                </button>
+
+                <p id="message"></p>
+
+            </div>
+
+            <p class="auth-switch">
+                Already have a space?
+                <a href="login.html">Log in</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase.js"></script>
+    <script src="../js/signup.js"></script>
+
+</body>
+</html>

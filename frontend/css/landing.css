@@ -456,3 +456,202 @@ section h2 {
         padding: 30px;
     }
 }
+.auth-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 7%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(155, 138, 203, 0.18), transparent 30%),
+        radial-gradient(circle at 75% 70%, rgba(217, 168, 187, 0.12), transparent 28%),
+        var(--night);
+}
+
+.auth-card {
+    width: min(480px, 100%);
+    padding: 55px 45px;
+    background: rgba(255, 245, 232, 0.06);
+    border: 1px solid rgba(255, 245, 232, 0.12);
+    border-radius: 20px;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.auth-card h1 {
+    font-size: clamp(2.8rem, 7vw, 4rem);
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.auth-card > p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.auth-form {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid rgba(255, 245, 232, 0.18);
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255, 245, 232, 0.06);
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.auth-form input::placeholder {
+    color: rgba(255, 245, 232, 0.45);
+}
+
+.auth-form input:focus {
+    border-color: var(--lavender);
+    background: rgba(255, 245, 232, 0.09);
+}
+
+.auth-form .btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 8px;
+}
+
+#message {
+    min-height: 20px;
+    color: var(--gold);
+    font-size: 0.85rem;
+}
+
+.auth-switch {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.auth-switch a {
+    color: var(--pink);
+}
+
+.auth-switch a:hover {
+    color: var(--cream);
+}
+.space-page {
+    min-height: calc(100vh - 80px);
+    background:
+        radial-gradient(circle at 75% 20%, rgba(155, 138, 203, 0.18), transparent 28%),
+        radial-gradient(circle at 15% 75%, rgba(217, 168, 187, 0.1), transparent 25%),
+        var(--night);
+}
+
+.space-hero {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 110px 7% 70px;
+}
+
+.space-hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    margin-bottom: 30px;
+}
+
+.space-hero h1 em {
+    color: var(--pink);
+    font-weight: 400;
+}
+
+.space-hero p {
+    max-width: 570px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.space-cards {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px 7% 100px;
+    display: grid;
+    gap: 18px;
+}
+
+.space-card {
+    display: grid;
+    grid-template-columns: 55px 1fr 30px;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 30px;
+    border: 1px solid rgba(255, 245, 232, 0.13);
+    border-radius: 16px;
+    background: rgba(255, 245, 232, 0.045);
+    transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+}
+
+.space-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 245, 232, 0.08);
+    border-color: rgba(242, 213, 139, 0.4);
+}
+
+.space-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(155, 138, 203, 0.18);
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+.space-card h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.space-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.arrow {
+    color: var(--gold);
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+.space-card:hover .arrow {
+    transform: translateX(5px);
+}
+
+@media (max-width: 650px) {
+    .space-hero {
+        padding-top: 80px;
+    }
+
+    .space-card {
+        grid-template-columns: 45px 1fr 20px;
+        padding: 22px;
+    }
+
+    .space-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .nav-links a:nth-child(3) {
+        display: none;
+    }
+}

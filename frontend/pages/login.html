@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log In — FutureSelf</title>
+
+    <link rel="stylesheet" href="../css/landing.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">FutureSelf</a>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="signup.html">Create account</a>
+        </div>
+    </nav>
+
+    <main class="auth-page">
+
+        <div class="auth-card">
+
+            <div class="section-label">✦ Welcome back</div>
+
+            <h1>Welcome back.</h1>
+
+            <p>
+                Your thoughts, memories and dreams
+                are waiting for you.
+            </p>
+
+            <div class="auth-form">
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Your email"
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Your password"
+                >
+
+                <button
+                    type="button"
+                    id="loginBtn"
+                    class="btn btn-primary"
+                >
+                    Enter my space ✦
+                </button>
+
+                <p id="message"></p>
+
+            </div>
+
+            <p class="auth-switch">
+                New to FutureSelf?
+                <a href="signup.html">Create an account</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase.js"></script>
+    <script src="../js/login.js"></script>
+
+</body>
+</html>
