@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Your Space — FutureSelf</title>
+    <title>My Space — FutureSelf</title>
 
     <link rel="stylesheet" href="../css/landing.css">
 </head>
@@ -15,7 +15,7 @@
         <a href="../index.html" class="logo">FutureSelf</a>
 
         <div class="nav-links">
-            <a href="space.html">My Space</a>
+            <a href="space.html" class="active">My Space</a>
             <a href="diary.html">Dear Diary</a>
             <a href="capsules.html">Time Capsules</a>
             <a href="#" id="logoutBtn">Log out</a>
@@ -33,32 +33,122 @@
                 <em id="username">dreamer.</em>
             </h1>
 
-            <p>
-                This is your space to remember who you were,
-                write about who you are, and dream about who you're becoming.
+            <p id="spaceGreeting">
+                A little space for your thoughts, memories and dreams.
             </p>
+
+            <div class="space-date" id="currentDate"></div>
 
         </section>
 
-        <section class="space-cards">
+        <section class="space-stats">
 
-            <a href="diary.html" class="space-card">
-                <span class="space-icon">✎</span>
+            <div class="stat-card">
+                <span class="stat-icon">✎</span>
                 <div>
+                    <span class="stat-number" id="diaryCount">0</span>
+                    <span class="stat-label">diary entries</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon">✦</span>
+                <div>
+                    <span class="stat-number" id="capsuleCount">0</span>
+                    <span class="stat-label">time capsules</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-icon">☾</span>
+                <div>
+                    <span class="stat-number" id="lockedCount">0</span>
+                    <span class="stat-label">waiting for you</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="space-actions">
+
+            <a href="diary.html" class="action-card diary-action">
+
+                <div class="action-icon">✎</div>
+
+                <div class="action-content">
+                    <span class="section-label">WRITE SOMETHING</span>
                     <h2>Dear Diary</h2>
-                    <p>Write about today.</p>
+                    <p>
+                        Put today's thoughts somewhere they'll always belong.
+                    </p>
                 </div>
-                <span class="arrow">→</span>
+
+                <span class="action-arrow">→</span>
+
             </a>
 
-            <a href="capsules.html" class="space-card">
-                <span class="space-icon">✦</span>
-                <div>
-                    <h2>Time Capsules</h2>
-                    <p>Write something for your future self.</p>
+            <a href="capsules.html" class="action-card capsule-action">
+
+                <div class="action-icon">✦</div>
+
+                <div class="action-content">
+                    <span class="section-label">SEND IT THROUGH TIME</span>
+                    <h2>Time Capsule</h2>
+                    <p>
+                        Leave a little piece of today for your future self.
+                    </p>
                 </div>
-                <span class="arrow">→</span>
+
+                <span class="action-arrow">→</span>
+
             </a>
+
+        </section>
+
+        <section class="space-content">
+
+            <div class="recent-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">✦ YOUR MEMORIES</span>
+                        <h2>Recent thoughts</h2>
+                    </div>
+
+                    <a href="diary.html" class="small-link">
+                        View diary →
+                    </a>
+                </div>
+
+                <div id="recentEntries" class="recent-entries">
+                    <p class="empty-space-message">
+                        Your memories will slowly fill this space.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="upcoming-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">✦ WAITING IN TIME</span>
+                        <h2>Next capsule</h2>
+                    </div>
+
+                    <a href="capsules.html" class="small-link">
+                        View all →
+                    </a>
+                </div>
+
+                <div id="nextCapsule" class="next-capsule">
+                    <div class="capsule-placeholder">
+                        <span>✦</span>
+                        <p>No messages are waiting in time yet.</p>
+                    </div>
+                </div>
+
+            </div>
 
         </section>
 
